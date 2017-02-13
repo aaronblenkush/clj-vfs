@@ -35,9 +35,10 @@
 
 (defn mv [{:keys [fs host opts]} ^String f1 ^String f2]
   "Performs a FTP/SFTP move/rename"
-  (let [url1 (clojure.string/join "/" [host f1]) url2 (clojure.string/join "/" [host f2])]
-    (with-open [f1-obj (-> fs (.resolveFile url1 opts)) ;remote file object
-                f2-obj (-> fs (.resolveFile url2 opts))] ;local file object
+  (let [url1 (clojure.string/join "/" [host f1])
+        url2 (clojure.string/join "/" [host f2])]
+    (with-open [f1-obj (-> fs (.resolveFile url1 opts))  ;remote file object
+                f2-obj (-> fs (.resolveFile url2 opts))] ;remote file object
       (-> f1-obj (.moveTo f2-obj)))))
 
 (defn details [ {:keys [fs host opts]} ^String remote]
